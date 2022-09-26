@@ -8,6 +8,7 @@ from datetime import datetime
 def index(request):
 
     API_KEY = config('API_KEY')
+    GOOGLE_API_KEY = config('GOOGLE_API_KEY')
     city = request.POST.get('city') or 'Ankara'
 
     url_week = 'https://api.openweathermap.org/data/2.5/forecast?q={}&appid={}&units=metric'.format(city, API_KEY)
@@ -47,6 +48,7 @@ def index(request):
             'temps': temps,
             'lat': r_today['coord']['lat'],
             'lon': r_today['coord']['lon'],
+            'google_api_key': GOOGLE_API_KEY,
         }
     else:
         context = {
@@ -69,6 +71,7 @@ def index(request):
             'temps': '',
             'lat': '',
             'lon': '',
+            'google_api_key': GOOGLE_API_KEY,
         }
 
     return render(request, 'weatherapp/index.html', context)
