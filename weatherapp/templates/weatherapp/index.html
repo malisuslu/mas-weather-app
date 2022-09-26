@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaoMezNJF9nmSuTBAngHFCij29wBSrK1w&libraries=places"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css"
+    />
+    <title>Weather App</title>
+  </head>
+  <body>
+    <div
+      class="bg-gradient-to-br from-yellow-400 to-pink-500 via-red-400 min-h-screen flex flex-col items-center"
+    >
+      <div class="w-11/12 md:w-1/2 lg:w-1/3 rounded-md p-4 mt-4">
+        <h1 class="text-2xl sm:text-4xl text-white font-bold mb-4 text-center">
+          Weather App
+        </h1>
+        <form method="POST" class="shadow-lg">
+          {% csrf_token %}
+          <div class="relative">
+            <div
+              class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"
+            >
+              <svg
+                aria-hidden="true"
+                class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                ></path>
+              </svg>
+            </div>
+            <input
+              type="text"
+              id="city"
+              name="city"
+              class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Type region..."
+              required
+            />
+            <input
+              type="submit"
+              id="submit"
+              name="submit"
+              class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              value="Search"
+            />
+          </div>
+        </form>
+        {% comment %} <div id="map" class="w-full h-[200px]"></div> {% endcomment %}
+        <iframe src = "https://maps.google.com/maps?q={{ lat }},{{ lon }}&hl=tr&z=8&amp;output=embed" class="w-full h-36"></iframe>
+      </div>
+
+      <div class="mx-auto p-4 px-0 h-fit flex justify-center">
+        <div class="flex flex-wrap">
+          <div class="w-full px-2">
+            <div
+              class="bg-white bg-opacity-50 text-black relative min-w-0 break-words rounded-lg overflow-hidden shadow-sm mb-4 w-full dark:bg-gray-600"
+            >
+              <div
+                class="px-6 py-6 relative min-w-[80vw] sm:min-w-fit md:max-w-sm"
+              >
+                <div class="flex mb-4 justify-between items-center">
+                  <div>
+                    <h5 class="mb-0 font-medium text-xl">{{ city }}</h5>
+                    <h6 class="mb-0 text-xs sm:text-base mr-8">{{ date }}</h6>
+                    <small>{{ desc }}</small>
+                  </div>
+                  <div class="text-right">
+                    <h3 class="font-bold text-4xl mb-0">
+                      <img
+                        src="http://openweathermap.org/img/wn/{{ icon }}@2x.png"
+                      />
+                    </h3>
+                  </div>
+                  <div class="text-right">
+                    <h3 class="font-bold text-4xl mb-0">
+                      <span>{{ temp }}&deg;</span>
+                    </h3>
+                  </div>
+                </div>
+                <div
+                  class="block sm:flex justify-between items-center flex-wrap"
+                >
+                  <div class="w-full sm:w-1/2">
+                    <div class="flex mb-2 justify-between items-center">
+                      <span>Feels like</span
+                      ><small class="px-2 inline-block"
+                        >{{ feel }}&nbsp;&deg;</small
+                      >
+                    </div>
+                  </div>
+                  <div class="w-full sm:w-1/2">
+                    <div class="flex mb-2 justify-between items-center">
+                      <span>Temp min</span
+                      ><small class="px-2 inline-block"
+                        >{{ min }}&nbsp;&deg;</small
+                      >
+                    </div>
+                  </div>
+                  <div class="w-full sm:w-1/2">
+                    <div class="flex mb-2 justify-between items-center">
+                      <span>Temp max</span
+                      ><small class="px-2 inline-block"
+                        >{{ max }}&nbsp;&deg;</small
+                      >
+                    </div>
+                  </div>
+                  <div class="w-full sm:w-1/2">
+                    <div class="flex mb-2 justify-between items-center">
+                      <span>Rain</span
+                      ><small class="px-2 inline-block">{{ rain }} mm</small>
+                    </div>
+                  </div>
+                  <div class="w-full sm:w-1/2">
+                    <div class="flex mb-2 justify-between items-center">
+                      <span>Humidity</span
+                      ><small class="px-2 inline-block">{{ humidity }} %</small>
+                    </div>
+                  </div>
+                  <div class="w-full sm:w-1/2">
+                    <div class="flex mb-2 justify-between items-center">
+                      <span>Wind Speed</span
+                      ><small class="px-2 inline-block">{{ wind }} km/h</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="divider table mx-2 text-center bg-transparent whitespace-nowrap"
+              >
+                <span class="inline-block px-3"><small>Forecast</small></span>
+              </div>
+              <div class="px-6 py-6 relative">
+                <div
+                  class="text-center justify-between items-center flex"
+                  style="flex-flow: initial"
+                >
+                  <div
+                    class="text-center mb-0 flex items-center justify-center flex-col"
+                  >
+                    <span class="block my-1">{{ week_days.1 }}</span
+                    ><img
+                      src="http://openweathermap.org/img/wn/{{ icons.1 }}@2x.png"
+                      class="block w-8 h-8"
+                    /><span class="block my-1 text-xs sm:text-base"
+                      >{{ temps.1 }}&deg;</span
+                    >
+                  </div>
+                  <div
+                    class="text-center mb-0 flex items-center justify-center flex-col"
+                  >
+                    <span class="block my-1">{{ week_days.2 }}</span
+                    ><img
+                      src="http://openweathermap.org/img/wn/{{ icons.2 }}@2x.png"
+                      class="block w-8 h-8"
+                    /><span class="block my-1 text-xs sm:text-base"
+                      >{{ temps.2 }}&deg;</span
+                    >
+                  </div>
+                  <div
+                    class="text-center mb-0 flex items-center justify-center flex-col"
+                  >
+                    <span class="block my-1">{{ week_days.3 }}</span
+                    ><img
+                      src="http://openweathermap.org/img/wn/{{ icons.3 }}@2x.png"
+                      class="block w-8 h-8"
+                    /><span class="block my-1 text-xs sm:text-base"
+                      >{{ temps.3 }}&deg;</span
+                    >
+                  </div>
+                  <div
+                    class="text-center mb-0 flex items-center justify-center flex-col"
+                  >
+                    <span class="block my-1">{{ week_days.4 }}</span
+                    ><img
+                      src="http://openweathermap.org/img/wn/{{ icons.4 }}@2x.png"
+                      class="block w-8 h-8"
+                    /><span class="block my-1 text-xs sm:text-base"
+                      >{{ temps.4 }}&deg;</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+    {% comment %}
+    <script type="text/javascript">
+      $(document).ready(function () {
+        let autocomplete;
+        let id = "city";
+
+        autocomplete = new google.maps.places.Autocomplete(
+          document.getElementById(id),
+          { types: ["geocode"] }
+        );
+      });
+    </script>
+    {% endcomment %}
+    <script type="text/javascript">
+      var myOptions = {
+        zoom: 8,
+        center: new google.maps.LatLng(39, 32),
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+      };
+
+      var map = new google.maps.Map(document.getElementById("map"), myOptions);
+    </script>
+  </body>
+</html>
