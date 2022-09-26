@@ -51,7 +51,7 @@
               type="text"
               id="city"
               name="city"
-              class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-t-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Type region..."
               required
             />
@@ -65,7 +65,7 @@
           </div>
         </form>
         {% comment %} <div id="map" class="w-full h-[200px]"></div> {% endcomment %}
-        <iframe src = "https://maps.google.com/maps?q={{ lat }},{{ lon }}&hl=tr&z=8&amp;output=embed" class="w-full h-36"></iframe>
+        <iframe src = "https://maps.google.com/maps?q={{ lat }},{{ lon }}&hl=tr&z=8&amp;output=embed" class="w-full h-36 rounded-b-lg"></iframe>
       </div>
 
       <div class="mx-auto p-4 px-0 h-fit flex justify-center">
