@@ -7,7 +7,7 @@
 
 <div align="center">
   <h3>
-    <a href="https://vercel.com/malisuslu/mas-weather-app">
+    <a href="https://mas-weather-app.vercel.app/">
       Demo
     </a>
      | 
