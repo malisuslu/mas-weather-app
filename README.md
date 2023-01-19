@@ -7,11 +7,11 @@
 
 <div align="center">
   <h3>
-    <a href="https://mas-weather-app.herokuapp.com/">
+    <a href="https://vercel.com/malisuslu/mas-weather-app">
       Demo
     </a>
      | 
-    <a href="https://github.com/malisuslu/mas-weather-app">
+    <a href="https://github.com/malisuslu/mas-weather-app.git">
       Project
     </a>
  
@@ -33,7 +33,7 @@
 
 ## Overview
 
-![screenshot](todo.PNG)
+<!-- ![screenshot](todo.PNG) -->
 
 ### Built With
 
@@ -43,6 +43,8 @@
 - CSS
 - JS
 - Django
+- Tailwind CSS
+- SQLite
 
 ## How To Use
 
@@ -51,24 +53,28 @@
 To clone and run this application, you'll need [Git](https://git-scm.com) 
 ```bash
 # Clone this repository
-$ git clone git@github.com:malisuslu/mas-todo-app.git
+$ git clone https://github.com/malisuslu/mas-weather-app.git
 
 # Install dependencies
     $ python -m venv env
     > env/Scripts/activate (for win OS)
     $ source env/bin/activate (for macOs/linux OS)
     $ pip install -r requirements.txt
-# Edit .backend.env to .env
-# Add SECRET_KEY in .env file
+
+# open the file "../mas-todo-app/main/settings.py", change the "SITE_ID" value from "2" to "1" and change the DEBUG value from "False" to "True" and save the file.
+    
+# Create ".env" file in the main directory "../mas-todo-app/"
+# Add "SECRET_KEY" in .env file
+# In order to use Google Authentication service you must also add some valid "GOOGLE_CLIENT_ID" and "GOOGLE_CLIENT_SECRET"
 
 # Run the app
     $ python manage.py runserver
 ```
 
 ## Acknowledgements
-- Information for your projects
+- This is a simple weather app created with Django framework that uses the OpenWeatherMap API to get the weather data of the city entered by the user.
 
 ## Contact
 
 - GitHub [@malisuslu](https://github.com/malisuslu)
-- Linkedin [@malisuslu](https://www.linkedin.com/in/muhammed-ali-s%C3%BCsl%C3%BC/)
+- Linkedin [@malisuslu](https://www.linkedin.com/in/malisuslu/)
